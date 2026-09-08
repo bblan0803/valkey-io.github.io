@@ -9,7 +9,7 @@ authors = ["bblan0803", "nassery318"]
 blog_type = ["Technical Deep Dive"]
 [extra]
 featured = true
-featured_image = "/assets/media/featured/valkey-admin-key-size-distribution-flat.svg"
+featured_image = "/assets/media/featured/key-size-distribution.webp"
 +++
 
 Nobody goes looking for a big key until something else breaks.
