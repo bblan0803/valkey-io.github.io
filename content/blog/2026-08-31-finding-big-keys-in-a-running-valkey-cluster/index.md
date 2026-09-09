@@ -1,7 +1,7 @@
 +++
 title = "Finding big keys in a running Valkey cluster with Valkey Admin"
 description = "Valkey Admin 1.1 adds big key detection, so you can find the largest keys across every shard of a running cluster from a single view, without parsing an RDB file offline or writing your own SCAN loop."
-date = 2026-09-03
+date = 2026-09-09
 draft = true
 authors = ["bblan0803", "nassery318"]
 
@@ -46,7 +46,7 @@ Start at the default to catch the obvious offenders, and raise the limit when yo
 ## How fast the scan is
 
 Valkey Admin 1.1.1 pipelines the per-key commands into one batch per `SCAN` iteration.
-We measured this on a 25-shard Amazon ElastiCache for Valkey 9.1.0 cluster with TLS.
+To give you a sense of scale, we measured a full pass on a 25-shard Amazon ElastiCache for Valkey 9.1.0 cluster with TLS.
 TLS is the slower configuration, so leaving it on makes these numbers more likely to be representative.
 The keyspace held 2 million string keys of 10 to 5,000 bytes.
 We also manually seeded 50 outliers, ranging from 100 KB to 1 MB, to test discovery.
@@ -59,7 +59,7 @@ We also manually seeded 50 outliers, ranging from 100 KB to 1 MB, to test discov
 | 1,750,000 | 9.13s |
 | 2,000,000 | 10.34s |
 
-Pipelining removes round trips, so larger keys, mixed types, or higher network latency will take longer than this.
+That is roughly 7,700 keys per second per primary, so you can estimate from your own key count and shard count. Collection types and higher network latency will push it slower.
 
 ## What to do once you have the results
 
