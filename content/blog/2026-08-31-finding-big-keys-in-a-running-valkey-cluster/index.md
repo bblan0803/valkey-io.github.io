@@ -10,6 +10,7 @@ blog_type = ["Technical Deep Dive"]
 [extra]
 featured = true
 featured_image = "/assets/media/featured/key-size-distribution.webp"
+og_image = "/blog/finding-big-keys-in-a-running-valkey-cluster/images/og.webp"
 +++
 
 Nobody goes looking for a big key until something else breaks.
